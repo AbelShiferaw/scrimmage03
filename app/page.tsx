@@ -27,7 +27,6 @@ export default function Home() {
   // When the manual data form is submitted, navigate to '/insert-data'
   const handleManualSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Here we navigate to a new page where you plan to add database logic later.
     router.push("/insert-data");
   };
 
@@ -128,6 +127,12 @@ export default function Home() {
               marginBottom: "10px",
             }}
           />
+          {/* Conditionally render the file name */}
+          {excelFile && (
+            <p style={{ color: "white", marginBottom: "10px" }}>
+              Selected file: {excelFile.name}
+            </p>
+          )}
           <button
             type="submit"
             style={{
