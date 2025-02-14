@@ -27,6 +27,7 @@ export default function Home() {
   const handleFileSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     router.push("/submitFile");
+    router.push("/submitFile");
   };
 
 
