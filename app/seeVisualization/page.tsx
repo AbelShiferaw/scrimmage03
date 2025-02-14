@@ -1,8 +1,15 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import { useRouter } from "next/navigation";
+import CardContainer from "../ui/CardContainer";
+import VisualizationForm from "../ui/visualization/VisualizationForm";
+import BackgroundCanvas from "../ui/BackgroundCanvas";
+import WelcomeText from "../ui/WelcomeText"; 
 
 export default function SeeVisualizationPage() {
+  const router = useRouter();
+
   const [input1, setInput1] = useState("");
   const [input2, setInput2] = useState("");
   const [input3, setInput3] = useState("");
@@ -23,68 +30,47 @@ export default function SeeVisualizationPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-4 h-screen">
+      <BackgroundCanvas />
+      <WelcomeText />
+
       <h1 className="text-3xl font-bold mb-6">See Visualization</h1>
-      
-      <form onSubmit={handleSubmit1} className="w-full max-w-md mb-6 bg-white/10 p-6 rounded-lg shadow-md">
-        <label htmlFor="input1" className="block text-sm font-bold mb-1">
-          Input Option 1
-        </label>
-        <input
-          id="input1"
-          type="text"
+      <button
+        className="absolute top-4 left-4 bg-gray-700 text-white py-2 px-4 rounded hover:bg-gray-600 transition"
+        onClick={() => router.back()}
+        > Back
+      </button>
+      <CardContainer>
+        <VisualizationForm
+          label="Input Option 1"
+          inputId="input1"
           placeholder="Enter first option"
           value={input1}
           onChange={(e) => setInput1(e.target.value)}
-          className="w-full p-3 mt-1 border-none rounded-lg text-base bg-white/20 text-white outline-none transition mb-4"
+          onSubmit={handleSubmit1}
+          buttonText="Person Name"
         />
-        <button
-          type="submit"
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg text-lg font-bold cursor-pointer transition"
-        >
-          Person Name
-        </button>
-      </form>
 
-      <form onSubmit={handleSubmit2} className="w-full max-w-md mb-6 bg-white/10 p-6 rounded-lg shadow-md">
-        <label htmlFor="input2" className="block text-sm font-bold mb-1">
-          Enter Group
-        </label>
-        <input
-          id="input2"
-          type="text"
+        <VisualizationForm
+          label="Group Top 5"
+          inputId="input2"
           placeholder="Enter second option"
           value={input2}
           onChange={(e) => setInput2(e.target.value)}
-          className="w-full p-3 mt-1 border-none rounded-lg text-base bg-white/20 text-white outline-none transition mb-4"
+          onSubmit={handleSubmit2}
+          buttonText="Group All Traits"
         />
-        <button
-          type="submit"
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg text-lg font-bold cursor-pointer transition"
-        >
-          Submit Input 2
-        </button>
-      </form>
 
-      <form onSubmit={handleSubmit3} className="w-full max-w-md bg-white/10 p-6 rounded-lg shadow-md">
-        <label htmlFor="input3" className="block text-sm font-bold mb-1">
-          Input Option 3
-        </label>
-        <input
-          id="input3"
-          type="text"
+        <VisualizationForm
+          label="Input Option 3"
+          inputId="input3"
           placeholder="Enter third option"
           value={input3}
           onChange={(e) => setInput3(e.target.value)}
-          className="w-full p-3 mt-1 border-none rounded-lg text-base bg-white/20 text-white outline-none transition mb-4"
+          onSubmit={handleSubmit3}
+          buttonText="Submit Input 3"
         />
-        <button
-          type="submit"
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg text-lg font-bold cursor-pointer transition"
-        >
-          Submit Input 3
-        </button>
-      </form>
+      </CardContainer>
     </div>
   );
 }
