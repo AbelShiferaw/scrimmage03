@@ -29,8 +29,9 @@ export default function Result() {
 
       const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 }) as any[][];
 
-      const rows = jsonData.map((row: any[]) => {
-        const group = row[0];
+      const rows = jsonData.map((row: any[],index) => {
+        console.log(`Row ${index}:`, row);
+        const group = parseInt(row[0],10);
         const name = row[1];
         const traits = row.slice(2, 7); 
         return { group, name, traits };
