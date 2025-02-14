@@ -6,6 +6,7 @@ import WelcomeText from "./ui/WelcomeText";
 import CardContainer from "./ui/CardContainer";
 import ManualDataForm from "./ui/ManualDataForm";
 import FileUploadForm from "./ui/FileUploadForm"; 
+import SeeVisualizationButton from "./ui/SeeVisualizationButton";
 
 export default function Home() {
   const router = useRouter();
@@ -18,6 +19,10 @@ export default function Home() {
   const handleManualSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     router.push("/submitData"); 
+  };
+
+  const handleSeeVisualization = () => {
+    router.push("/seeVisualization");
   };
 
   return (
@@ -43,7 +48,12 @@ export default function Home() {
           onInputChange2={() => {}}
           onSubmit={handleManualSubmit}
         />
+
+
       </CardContainer>
+
+       <SeeVisualizationButton />
+
     </div>
   );
 }
