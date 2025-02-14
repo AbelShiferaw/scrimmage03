@@ -1,21 +1,20 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import React from "react";
 
-export default function SeeVisualizationButton() {
-  const router = useRouter();
+interface SeeVisualizationButtonProps {
+  onClick: () => void;
+}
 
-  const handleClick = () => {
-    console.log("Button clicked, attempting to navigate...");
-    router.push("/seeVisualization");
-  };
-
+const SeeVisualizationButton: React.FC<SeeVisualizationButtonProps> = ({ onClick }) => {
   return (
     <button
-      onClick={handleClick}
-      className="mt-6 bg-red-500 hover:bg-red-1000 text-white font-bold py-4 px-8 text-lg rounded"
+      className="mt-6 bg-red-500 text-white font-bold py-4 px-8 text-lg rounded transition-colors duration-300 hover:bg-red-600"
+      onClick={onClick}
     >
-      See Strengths Visualization
+      See Visualization
     </button>
   );
-}
+};
+
+export default SeeVisualizationButton;
