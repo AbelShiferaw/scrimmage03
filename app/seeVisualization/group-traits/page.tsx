@@ -1,10 +1,11 @@
+// pages/seeVisualization/group-traits.tsx
 "use client";
 
-import { useState, useEffect, FormEvent } from "react";
+import { Suspense, useState, useEffect, FormEvent } from "react";
 import { Bar } from "react-chartjs-2";
-import { useRouter } from "next/navigation";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import BackgroundCanvas from "../../ui/BackgroundCanvas";
+import WelcomeText from "../../ui/WelcomeText";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -14,11 +15,17 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import router from "next/router";
 
+// Register ChartJS components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-export default function GroupTraitsPage() {
+interface TraitData {
+  trait: string;
+  count: number;
+}
+
+// This component contains the content that uses useSearchParams()
+function GroupTraitsContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const queryGroupId = searchParams.get("number");
@@ -38,8 +45,8 @@ export default function GroupTraitsPage() {
         return;
       }
 
-      const labels = result.data.map((row: any) => row.trait);
-      const counts = result.data.map((row: any) => row.count);
+      const labels = result.data.map((row: TraitData) => row.trait);
+      const counts = result.data.map((row: TraitData) => row.count);
 
       setChartData({
         labels,
@@ -72,18 +79,12 @@ export default function GroupTraitsPage() {
   return (
     <div className="flex flex-col items-center justify-start bg-black text-white min-h-screen p-4 relative">
       <BackgroundCanvas />
-      <h1>All Traits in the Group</h1>
-      <button
-        className="absolute top-4 left-4 bg-gray-700 text-white py-2 px-4 rounded hover:bg-gray-600 transition"
-        onClick={() => router.back()}
-      >
-        Back
-      </button>
+      <WelcomeText />
+      <h1 className="text-3xl font-bold mb-6">All Traits in the Group</h1>
       <div className="w-full max-w-7xl bg-white/10 backdrop-blur-xl p-8 rounded-lg shadow-xl mt-8">
         <h1 className="text-4xl font-bold mb-8 text-center">
           Group Traits Bar Graph
         </h1>
-        
 
         {!queryGroupId && (
           <form onSubmit={handleSubmit} className="flex flex-col items-center mb-8">
@@ -98,7 +99,7 @@ export default function GroupTraitsPage() {
             </label>
             <button
               type="submit"
-              className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded"
+              className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded transition"
             >
               Submit
             </button>
@@ -113,6 +114,21 @@ export default function GroupTraitsPage() {
           </div>
         )}
       </div>
+      <button
+        className="mt-6 bg-gray-700 text-white py-2 px-4 rounded hover:bg-gray-600 transition absolute top-4 left-4"
+        onClick={() => router.back()}
+      >
+        Back
+      </button>
     </div>
+  );
+}
+
+// Wrap the content in a Suspense boundary
+export default function GroupTraitsPage() {
+  return (
+    <Suspense fallback={<div>Loading group traits...</div>}>
+      <GroupTraitsContent />
+    </Suspense>
   );
 }

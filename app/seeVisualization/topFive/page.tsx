@@ -1,9 +1,11 @@
+// pages/seeVisualization/topFive.tsx
 "use client";
 
-import { useState, useEffect, FormEvent } from "react";
+import { Suspense, useState, useEffect, FormEvent } from "react";
 import { Bar } from "react-chartjs-2";
 import { useSearchParams, useRouter } from "next/navigation";
 import BackgroundCanvas from "@/app/ui/BackgroundCanvas";
+import WelcomeText from "@/app/ui/WelcomeText";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -14,6 +16,7 @@ import {
   Legend,
 } from "chart.js";
 
+// Register ChartJS components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 interface TraitData {
@@ -21,7 +24,8 @@ interface TraitData {
   count: number;
 }
 
-export default function TopFivePage() {
+// This component contains all the logic that uses useSearchParams()
+function TopFiveContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const queryGroupId = searchParams.get("group") || "";
@@ -76,6 +80,7 @@ export default function TopFivePage() {
   return (
     <div className="flex flex-col items-center justify-start bg-black text-white min-h-screen p-4 relative">
       <BackgroundCanvas />
+      <WelcomeText />
       <h1 className="text-3xl font-bold mb-6">All Traits in the Group</h1>
       
       <div className="w-full max-w-7xl bg-white/10 backdrop-blur-xl p-8 rounded-lg shadow-xl mt-8">
@@ -119,5 +124,14 @@ export default function TopFivePage() {
         Back
       </button>
     </div>
+  );
+}
+
+// Wrap the content in a Suspense boundary
+export default function TopFivePage() {
+  return (
+    <Suspense fallback={<div>Loading top traits...</div>}>
+      <TopFiveContent />
+    </Suspense>
   );
 }
