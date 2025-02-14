@@ -49,6 +49,7 @@ export default function SeeVisualizationPage() {
   const handleSubmit3 = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Form 3 submitted with:", input3);
+    router.push(`/group-traits?number=${input3}`);
   };
 
   return (
