@@ -14,7 +14,7 @@ export interface TraitsFormProps {
   onChangeTrait4: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeTrait5: (e: ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
-  disabled?: boolean; // Add this optional prop
+  disabled?: boolean;
 }
 
 const TraitsForm = ({
@@ -29,7 +29,7 @@ const TraitsForm = ({
   onChangeTrait4,
   onChangeTrait5,
   onSubmit,
-  disabled = false, // default to false
+  disabled = false, 
 }: TraitsFormProps) => {
   return (
     <form onSubmit={onSubmit}>
