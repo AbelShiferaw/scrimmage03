@@ -15,11 +15,6 @@ export default function SeeVisualizationPage() {
   const [groupInput, setGroupInput] = useState("");
   const [input3, setInput3] = useState("");
 
-  // const handleSubmit1 = (e: FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   console.log("Form 1 submitted with:", input1);
-  // };
-
   const handleSubmit2 = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const groupNumber = Number(groupInput);
@@ -34,7 +29,7 @@ export default function SeeVisualizationPage() {
   const handleSubmit3 = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Form 3 submitted with:", input3);
-    router.push(`/group-traits?number=${input3}`);
+    router.push(`/seeVisualization/group-traits?number=${input3}`);
   };
 
   return (
@@ -48,15 +43,6 @@ export default function SeeVisualizationPage() {
         Back
       </button>
       <CardContainer>
-        {/* <VisualizationForm
-          label="Input Option 1"
-          inputId="input1"
-          placeholder="Enter first option"
-          value={input1}
-          onChange={(e) => setInput1(e.target.value)}
-          onSubmit={handleSubmit1}
-          buttonText="Person Name"
-        /> */}
 
         <VisualizationForm
           label="Group Top 5"

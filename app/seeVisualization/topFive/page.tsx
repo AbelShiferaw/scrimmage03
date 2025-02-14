@@ -1,4 +1,3 @@
-// pages/topFive.tsx
 "use client";
 
 import { useState, useEffect, FormEvent } from "react";
@@ -15,7 +14,6 @@ import {
   Legend,
 } from "chart.js";
 
-// Register ChartJS components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 interface TraitData {
@@ -85,7 +83,6 @@ export default function TopFivePage() {
           Group Traits Bar Graph
         </h1>
 
-        {/* If no group number is provided in the URL, show a form to submit one */}
         {!queryGroupId && (
           <form onSubmit={handleSubmit} className="flex flex-col items-center mb-8">
             <label className="text-xl mb-4">

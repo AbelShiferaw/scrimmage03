@@ -4,7 +4,7 @@ import { useState, useEffect, FormEvent } from "react";
 import { Bar } from "react-chartjs-2";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
-import BackgroundCanvas from "../ui/BackgroundCanvas";
+import BackgroundCanvas from "../../ui/BackgroundCanvas";
 import {
   Chart as ChartJS,
   CategoryScale,

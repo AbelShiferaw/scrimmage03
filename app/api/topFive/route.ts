@@ -1,4 +1,3 @@
-// app/api/topFive/route.ts
 import { NextResponse } from "next/server";
 import sqlite3 from "sqlite3";
 
@@ -6,7 +5,6 @@ const db = new sqlite3.Database("./database.db");
 
 export async function GET(request: Request) {
   try {
-    // Extract the query parameter from the URL
     const { searchParams } = new URL(request.url);
     const group = searchParams.get("group");
 
@@ -14,7 +12,6 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: "Missing group number" }, { status: 400 });
     }
 
-    // Wrap your database queries in a Promise.
     const topTraits = await new Promise<{ trait: string; count: number }[]>((resolve, reject) => {
       const query = `
         SELECT t.trait, COUNT(*) as count 
