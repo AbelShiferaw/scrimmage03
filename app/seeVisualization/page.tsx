@@ -54,21 +54,21 @@ export default function SeeVisualizationPage() {
         <VisualizationForm
           label="Group Top 5"
           inputId="input2"
-          placeholder="Enter second option"
+          placeholder="Enter Group Number"
           value={input2}
           onChange={(e) => setInput2(e.target.value)}
           onSubmit={handleSubmit2}
-          buttonText="Group All Traits"
+          buttonText="Get Visualization"
         />
 
         <VisualizationForm
           label="Input Option 3"
           inputId="input3"
-          placeholder="Enter third option"
+          placeholder="Enter Group Number"
           value={input3}
           onChange={(e) => setInput3(e.target.value)}
           onSubmit={handleSubmit3}
-          buttonText="Submit Input 3"
+          buttonText="Get Visualization"
         />
       </CardContainer>
     </div>
