@@ -15,10 +15,10 @@ export default function SeeVisualizationPage() {
   const [groupInput, setGroupInput] = useState("");
   const [input3, setInput3] = useState("");
 
-  const handleSubmit1 = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("Form 1 submitted with:", input1);
-  };
+  // const handleSubmit1 = (e: FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   console.log("Form 1 submitted with:", input1);
+  // };
 
   const handleSubmit2 = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -48,7 +48,7 @@ export default function SeeVisualizationPage() {
         Back
       </button>
       <CardContainer>
-        <VisualizationForm
+        {/* <VisualizationForm
           label="Input Option 1"
           inputId="input1"
           placeholder="Enter first option"
@@ -56,7 +56,7 @@ export default function SeeVisualizationPage() {
           onChange={(e) => setInput1(e.target.value)}
           onSubmit={handleSubmit1}
           buttonText="Person Name"
-        />
+        /> */}
 
         <VisualizationForm
           label="Group Top 5"
