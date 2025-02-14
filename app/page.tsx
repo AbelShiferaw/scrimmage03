@@ -7,6 +7,7 @@ import WelcomeText from "./ui/WelcomeText";
 import CardContainer from "./ui/CardContainer";
 import FileUploadForm from "./ui/FileUploadForm";
 import ManualDataForm from "./ui/ManualDataForm";
+import SeeVisualizationButton from "./ui/SeeVisualizationButton";
 
 export default function Home() {
   const router = useRouter();
