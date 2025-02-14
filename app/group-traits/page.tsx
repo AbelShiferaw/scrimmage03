@@ -1,7 +1,10 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import { Bar } from "react-chartjs-2";
+import { useSearchParams } from "next/navigation";
+import BackgroundCanvas from "../ui/BackgroundCanvas";
+import WelcomeText from "../ui/WelcomeText";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -12,19 +15,19 @@ import {
   Legend,
 } from "chart.js";
 
-// Register the Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 export default function GroupTraitsPage() {
-  const [groupId, setGroupId] = useState("");
+  const searchParams = useSearchParams();
+  const queryGroupId = searchParams.get("number");
+
+  const [groupId, setGroupId] = useState(queryGroupId || "");
   const [chartData, setChartData] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
+  const fetchData = async (id: string) => {
     try {
-      const res = await fetch(`/api/traits?groupId=${groupId}`);
+      const res = await fetch(`/api/traits?groupId=${id}`);
       const result = await res.json();
 
       if (result.error) {
@@ -33,7 +36,6 @@ export default function GroupTraitsPage() {
         return;
       }
 
-      // Prepare the data for the bar chart
       const labels = result.data.map((row: any) => row.trait);
       const counts = result.data.map((row: any) => row.count);
 
@@ -54,31 +56,54 @@ export default function GroupTraitsPage() {
     }
   };
 
+  useEffect(() => {
+    if (queryGroupId) {
+      fetchData(queryGroupId);
+    }
+  }, [queryGroupId]);
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    fetchData(groupId);
+  };
+
   return (
-    <div style={{ padding: "20px", color: "#333" }}>
-      <h1>Group Traits Bar Graph</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Group ID:
-          <input
-            type="text"
-            value={groupId}
-            onChange={(e) => setGroupId(e.target.value)}
-            style={{ marginLeft: "10px", padding: "5px" }}
-          />
-        </label>
-        <button type="submit" style={{ marginLeft: "10px", padding: "5px" }}>
-          Submit
-        </button>
-      </form>
+    <div className="flex flex-col items-center justify-start bg-black text-white min-h-screen p-4 relative">
+      <BackgroundCanvas />
+      <WelcomeText />
+      <div className="w-full max-w-7xl bg-white/10 backdrop-blur-xl p-8 rounded-lg shadow-xl mt-8">
+        <h1 className="text-4xl font-bold mb-8 text-center">
+          Group Traits Bar Graph
+        </h1>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+        {!queryGroupId && (
+          <form onSubmit={handleSubmit} className="flex flex-col items-center mb-8">
+            <label className="text-xl mb-4">
+              Group ID:
+              <input
+                type="text"
+                value={groupId}
+                onChange={(e) => setGroupId(e.target.value)}
+                className="ml-2 p-2 border border-gray-300 rounded bg-white text-black"
+              />
+            </label>
+            <button
+              type="submit"
+              className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded"
+            >
+              Submit
+            </button>
+          </form>
+        )}
 
-      {chartData && (
-        <div style={{ maxWidth: "600px", marginTop: "20px" }}>
-          <Bar data={chartData} />
-        </div>
-      )}
+        {error && <p className="text-red-500 text-center">{error}</p>}
+
+        {chartData && (
+          <div className="w-full mt-8">
+            <Bar data={chartData} />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
