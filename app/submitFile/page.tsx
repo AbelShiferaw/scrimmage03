@@ -2,11 +2,14 @@
 
 import { useState, useEffect, ChangeEvent } from "react";
 import * as XLSX from "xlsx";
+import { useRouter} from "next/navigation";
 import ResultHeader from "../ui/submitFile/ResultHeader";
 import FileUploader from "../ui/submitFile/FileUploader";
 import ProcessedDataList, {ProcessedRow} from "../ui/submitFile/ProcessedDataList";
+import CardContainer from "../ui/CardContainer";
 
 export default function Result() {
+  const router = useRouter();
   const [file, setFile] = useState<File | null>(null);
   const [processedRows, setProcessedRows] = useState<ProcessedRow[]>([]);
 
@@ -65,10 +68,18 @@ export default function Result() {
   }, [file]);
 
   return (
-    <div className="p-8">
-      <ResultHeader />
-      <FileUploader onFileChange={handleFileChange} />
-      <ProcessedDataList processedRows={processedRows} />
+    <div className="flex flex-col p-8 items-center justify-center relative bg-black h-screen">
+      <button
+        className="absolute top-4 left-4 bg-gray-700 text-white py-2 px-4 rounded hover:bg-gray-600 transition"
+        onClick={() => router.back()}
+        > Back
+      </button>
+      <CardContainer>
+        <ResultHeader />
+        <FileUploader onFileChange={handleFileChange} />
+        <ProcessedDataList processedRows={processedRows} />
+      </CardContainer>
+      
     </div>
   );
 }

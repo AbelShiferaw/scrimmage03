@@ -1,11 +1,19 @@
 "use client";
 
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import CardContainer from "../ui/CardContainer";
 import TraitsForm from "../ui/submitData/TraitsForm";
 
 export default function SubmitDataPage() {
+  return (
+    <Suspense fallback={<div>Loading search parameters...</div>}>
+      <SubmitDataContent />
+    </Suspense>
+  );
+}
+
+function SubmitDataContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const group = searchParams.get("group") || "";
@@ -16,7 +24,6 @@ export default function SubmitDataPage() {
   const [trait3, setTrait3] = useState("");
   const [trait4, setTrait4] = useState("");
   const [trait5, setTrait5] = useState("");
-
 
   const isSubmitDisabled =
     !trait1.trim() ||
@@ -54,11 +61,12 @@ export default function SubmitDataPage() {
 
   return (
     <div className="flex flex-col justify-center items-center h-screen m-0 font-sans bg-black relative overflow-hidden">
-        <button
+      <button
         className="absolute top-4 left-4 bg-gray-700 text-white py-2 px-4 rounded hover:bg-gray-600 transition"
         onClick={() => router.back()}
-        > Back
-        </button>
+      >
+        Back
+      </button>
       <CardContainer>
         <h2 className="text-2xl font-bold mb-5">Submit Your Traits</h2>
         <p className="mb-4 text-white">
