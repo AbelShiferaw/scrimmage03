@@ -50,7 +50,7 @@ function SubmitDataContent() {
       });
       const data = await res.json();
       if (data.success) {
-        router.push("/result");
+        router.push("/seeVisualization");
       } else {
         console.error("Upload error:", data);
       }
