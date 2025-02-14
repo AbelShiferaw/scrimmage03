@@ -1,4 +1,3 @@
-// pages/seeVisualization/topFive.tsx
 "use client";
 
 import { Suspense, useState, useEffect, FormEvent } from "react";
@@ -16,7 +15,7 @@ import {
   Legend,
 } from "chart.js";
 
-// Register ChartJS components
+
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 interface TraitData {
@@ -24,7 +23,7 @@ interface TraitData {
   count: number;
 }
 
-// This component contains all the logic that uses useSearchParams()
+
 function TopFiveContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -45,7 +44,6 @@ function TopFiveContent() {
         return;
       }
 
-      // Assume result.topTraits is an array of TraitData.
       const labels = result.topTraits.map((row: TraitData) => row.trait);
       const counts = result.topTraits.map((row: TraitData) => row.count);
 
@@ -127,7 +125,7 @@ function TopFiveContent() {
   );
 }
 
-// Wrap the content in a Suspense boundary
+
 export default function TopFivePage() {
   return (
     <Suspense fallback={<div>Loading top traits...</div>}>

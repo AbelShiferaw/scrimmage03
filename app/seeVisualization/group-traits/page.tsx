@@ -1,4 +1,3 @@
-// pages/seeVisualization/group-traits.tsx
 "use client";
 
 import { Suspense, useState, useEffect, FormEvent } from "react";
@@ -16,7 +15,7 @@ import {
   Legend,
 } from "chart.js";
 
-// Register ChartJS components
+
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 interface TraitData {
@@ -24,7 +23,7 @@ interface TraitData {
   count: number;
 }
 
-// This component contains the content that uses useSearchParams()
+
 function GroupTraitsContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -124,7 +123,7 @@ function GroupTraitsContent() {
   );
 }
 
-// Wrap the content in a Suspense boundary
+
 export default function GroupTraitsPage() {
   return (
     <Suspense fallback={<div>Loading group traits...</div>}>
