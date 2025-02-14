@@ -11,11 +11,9 @@ import ManualDataForm from "./ui/ManualDataForm";
 export default function Home() {
   const router = useRouter();
 
-
   const [manualInput1, setManualInput1] = useState("");
-  const [manualInput2, setManualInput2] = useState("");
+  const [manualInput2, setManualInput2] = useState(""); 
   const [excelFile, setExcelFile] = useState<File | null>(null);
-
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -23,17 +21,38 @@ export default function Home() {
     }
   };
 
-
   const handleFileSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push("/submitFile");
+
+    if (!excelFile) {
+      alert("Please upload an Excel file before submitting.");
+      return;
+    }
+
+    const allowedExtensions = /(\.xls|\.xlsx)$/i;
+    if (!allowedExtensions.exec(excelFile.name)) {
+      alert("Please upload a valid Excel file (.xls or .xlsx).");
+      return;
+    }
     router.push("/submitFile");
   };
 
-
   const handleManualSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push("/submitData");
+
+    const groupNumber = Number(manualInput1);
+    if (!manualInput1 || isNaN(groupNumber) || !Number.isInteger(groupNumber)) {
+      alert("Please enter a valid group number (an integer).");
+      return;
+    }
+    if (!manualInput2.trim()) {
+      alert("Please enter a valid name.");
+      return;
+    }
+
+    router.push(
+      `/submitData?group=${encodeURIComponent(manualInput1)}&name=${encodeURIComponent(manualInput2)}`
+    );
   };
 
   return (

@@ -1,8 +1,9 @@
-// ui/TraitsForm.tsx
+// ui/submitData/TraitsForm.tsx
 "use client";
-import { FormEvent, ChangeEvent } from "react";
 
-interface TraitsFormProps {
+import { ChangeEvent, FormEvent } from "react";
+
+export interface TraitsFormProps {
   trait1: string;
   trait2: string;
   trait3: string;
@@ -14,6 +15,7 @@ interface TraitsFormProps {
   onChangeTrait4: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeTrait5: (e: ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  disabled?: boolean; // Add this optional prop
 }
 
 const TraitsForm = ({
@@ -28,6 +30,7 @@ const TraitsForm = ({
   onChangeTrait4,
   onChangeTrait5,
   onSubmit,
+  disabled = false, // default to false
 }: TraitsFormProps) => {
   return (
     <form onSubmit={onSubmit}>
@@ -83,7 +86,12 @@ const TraitsForm = ({
       </div>
       <button
         type="submit"
-        className="w-full bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg text-lg font-bold cursor-pointer transition"
+        disabled={disabled}
+        className={`w-full p-3 rounded-lg text-lg font-bold cursor-pointer transition ${
+          disabled
+            ? "bg-gray-500"
+            : "bg-blue-500 hover:bg-blue-600 text-white"
+        }`}
       >
         Submit Traits
       </button>
