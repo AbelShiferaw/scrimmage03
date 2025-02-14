@@ -11,28 +11,28 @@ import ManualDataForm from "./ui/ManualDataForm";
 export default function Home() {
   const router = useRouter();
 
-  // States for manual input and file upload
+
   const [manualInput1, setManualInput1] = useState("");
   const [manualInput2, setManualInput2] = useState("");
   const [excelFile, setExcelFile] = useState<File | null>(null);
 
-  // Handle file selection
+
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setExcelFile(e.target.files[0]);
     }
   };
 
-  // When the file form is submitted, navigate to '/result'
+
   const handleFileSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push("/result");
+    router.push("/submitFile");
   };
 
-  // When the manual data form is submitted, navigate to '/insert-data'
+
   const handleManualSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push("/insert-data");
+    router.push("/submitData");
   };
 
   return (

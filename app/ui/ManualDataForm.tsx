@@ -19,21 +19,21 @@ const ManualDataForm = ({
   return (
     <form onSubmit={onSubmit}>
       <label className="block text-left text-sm font-bold mb-1">
-        First Data
+        Group Number
       </label>
       <input
         type="text"
-        placeholder="Enter first data"
+        placeholder="Enter Group Number"
         value={manualInput1}
         onChange={onInputChange1}
         className="w-full p-3 mt-1 border-none rounded-lg text-base bg-white/20 text-white outline-none transition mb-2"
       />
       <label className="block text-left text-sm font-bold mb-1">
-        Second Data
+        Name
       </label>
       <input
         type="text"
-        placeholder="Enter second data"
+        placeholder="Enter Name"
         value={manualInput2}
         onChange={onInputChange2}
         className="w-full p-3 mt-1 border-none rounded-lg text-base bg-white/20 text-white outline-none transition mb-5"
