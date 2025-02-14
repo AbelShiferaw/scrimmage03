@@ -62,7 +62,7 @@ export default function SeeVisualizationPage() {
         />
 
         <VisualizationForm
-          label="Input Option 3"
+          label="All Group Traits"
           inputId="input3"
           placeholder="Enter Group Number"
           value={input3}
