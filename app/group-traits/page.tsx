@@ -2,9 +2,9 @@
 
 import { useState, useEffect, FormEvent } from "react";
 import { Bar } from "react-chartjs-2";
+import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import BackgroundCanvas from "../ui/BackgroundCanvas";
-import WelcomeText from "../ui/WelcomeText";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -14,10 +14,12 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import router from "next/router";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 export default function GroupTraitsPage() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const queryGroupId = searchParams.get("number");
 
@@ -71,10 +73,17 @@ export default function GroupTraitsPage() {
     <div className="flex flex-col items-center justify-start bg-black text-white min-h-screen p-4 relative">
       <BackgroundCanvas />
       <h1>All Traits in the Group</h1>
+      <button
+        className="absolute top-4 left-4 bg-gray-700 text-white py-2 px-4 rounded hover:bg-gray-600 transition"
+        onClick={() => router.back()}
+      >
+        Back
+      </button>
       <div className="w-full max-w-7xl bg-white/10 backdrop-blur-xl p-8 rounded-lg shadow-xl mt-8">
         <h1 className="text-4xl font-bold mb-8 text-center">
           Group Traits Bar Graph
         </h1>
+        
 
         {!queryGroupId && (
           <form onSubmit={handleSubmit} className="flex flex-col items-center mb-8">

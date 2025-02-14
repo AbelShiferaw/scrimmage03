@@ -4,16 +4,18 @@ import sqlite3 from "sqlite3";
 
 const db = new sqlite3.Database("./database.db");
 
-export async function POST(request: Request) {
+export async function GET(request: Request) {
   try {
-    const { group } = await request.json();
+    // Extract the query parameter from the URL
+    const { searchParams } = new URL(request.url);
+    const group = searchParams.get("group");
+
     if (!group) {
       return NextResponse.json({ error: "Missing group number" }, { status: 400 });
     }
 
     // Wrap your database queries in a Promise.
     const topTraits = await new Promise<{ trait: string; count: number }[]>((resolve, reject) => {
-      // Example query: join people and traits, group by trait, count occurrences, filter by group, and order descending.
       const query = `
         SELECT t.trait, COUNT(*) as count 
         FROM traits t
