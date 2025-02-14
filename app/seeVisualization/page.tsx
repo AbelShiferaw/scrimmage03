@@ -42,13 +42,13 @@ export default function SeeVisualizationPage() {
           type="submit"
           className="w-full bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg text-lg font-bold cursor-pointer transition"
         >
-          Submit Input 1
+          Person Name
         </button>
       </form>
 
       <form onSubmit={handleSubmit2} className="w-full max-w-md mb-6 bg-white/10 p-6 rounded-lg shadow-md">
         <label htmlFor="input2" className="block text-sm font-bold mb-1">
-          Input Option 2
+          Group Top 5
         </label>
         <input
           id="input2"
@@ -62,7 +62,7 @@ export default function SeeVisualizationPage() {
           type="submit"
           className="w-full bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg text-lg font-bold cursor-pointer transition"
         >
-          Submit Input 2
+          Group All Traits
         </button>
       </form>
 
