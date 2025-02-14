@@ -1,4 +1,3 @@
-// ui/submitData/TraitsForm.tsx
 "use client";
 
 import { ChangeEvent, FormEvent } from "react";

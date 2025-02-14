@@ -1,4 +1,3 @@
-// app/api/uploadManual/route.ts
 import { NextResponse } from "next/server";
 import sqlite3 from "sqlite3";
 

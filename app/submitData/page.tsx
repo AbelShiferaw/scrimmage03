@@ -54,6 +54,11 @@ export default function SubmitDataPage() {
 
   return (
     <div className="flex flex-col justify-center items-center h-screen m-0 font-sans bg-black relative overflow-hidden">
+        <button
+        className="absolute top-4 left-4 bg-gray-700 text-white py-2 px-4 rounded hover:bg-gray-600 transition"
+        onClick={() => router.back()}
+        > Back
+        </button>
       <CardContainer>
         <h2 className="text-2xl font-bold mb-5">Submit Your Traits</h2>
         <p className="mb-4 text-white">
