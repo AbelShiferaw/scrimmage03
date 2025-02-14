@@ -70,7 +70,7 @@ export default function GroupTraitsPage() {
   return (
     <div className="flex flex-col items-center justify-start bg-black text-white min-h-screen p-4 relative">
       <BackgroundCanvas />
-      <WelcomeText />
+      <h1>All Traits in the Group</h1>
       <div className="w-full max-w-7xl bg-white/10 backdrop-blur-xl p-8 rounded-lg shadow-xl mt-8">
         <h1 className="text-4xl font-bold mb-8 text-center">
           Group Traits Bar Graph
